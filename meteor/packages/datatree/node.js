@@ -54,15 +54,16 @@ _.extend(Node.prototype, {
     },
 
     threads: function () {
+        var self = this;
         return _.map(this._data.threads, function (data) {
-            return new Thread(data);
+            return new Thread(self, data);
         });
     },
 
     createThread: function (type) {
         check(type, String);
 
-        var thread = new Thread({ _type: type });
+        var thread = new Thread(this, { _type: type });
 
         if (!this._data.hasOwnProperty('threads'))
             this._data.threads = [];

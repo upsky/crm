@@ -9,4 +9,12 @@ datatree
 underscore
 iron:router
 mquandalle:jade
+plugins
+tasks
+people
+crm-render
+reactive-var
+linto:bootstrap
+sujith3g:jstree
+jquery
 

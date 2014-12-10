@@ -2,13 +2,99 @@
  * Created by kriz on 08.12.14.
  */
 
-Template.TreeTest.helpers({
-    root: function () {
+
+var currentNode = new ReactiveVar(null);
+var selectedNode = function () {
+    return DataTree.find(currentNode.get() || '');
+};
+
+Template.TreeContent.rendered = function () {
+    var map = function (node) {
+        return {
+            text: node.id(),
+            node: node,
+            nodes: node.hasChildNodes() ? _.map(node.children(), map) : undefined
+        };
+    };
+
+    Deps.autorun(function () {
         var root = DataTree.root();
-        console.log('%o', root);
+        var data = [ map(root) ];
+
+        Tracker.afterFlush(function () {
+            var tree = $('#tree-content');
+            //tree.treeview('remove');
+            tree.treeview({
+                data: data,
+                onNodeSelected: function (event, node) {
+                    currentNode.set(node.node.id());
+                },
+                levels: 4
+            });
+        });
+    });
+
+    //.on('select_node.jstree', function (node) {
+    //    currentNode.set(node.node);
+    //})
+    //.jstree({
+    //    core: {
+    //        data: [
+    //            'simple',
+    //            'simple2'
+    //            //map(root)
+    //        ]
+    //    }
+    //});
+};
+
+Template.TreeContent.events({
+    'click #add': function () {
+        var selected = selectedNode();
+        if (selected == null)
+            return;
+
+        console.log('add');
+
+        selected.createChild();
     },
-    name: function () {
-        var root = DataTree.root();
-        return typeof root != 'undefined' ? root.data().name : 'noname';
+
+    'click #rem': function () {
+        var selected = selectedNode();
+        if (selected == null)
+            return;
+
+        DataTree.remove(selected);
     }
+});
+
+Template.NodeContent.helpers({
+    nodeSelected: function () {
+        return selectedNode() !== null;
+    },
+
+    currentNode: function () {
+        return selectedNode();
+    }
+});
+
+
+Template.NodeThread.helpers({
+    showThread: function () {
+        var cb = Plugin._threadCallbacks(this.type());
+        var self = this;
+        var template = cb.template();
+        return template;
+    }
+});
+
+Template.NodeToolbar.helpers({
+   toolbars: function () {
+       var cb = Plugin._staticCallbacks('node-toolbar');
+       return cb;
+   },
+
+   renderBar: function () {
+       return this.template();//UI.With({}, this.template());
+   }
 });

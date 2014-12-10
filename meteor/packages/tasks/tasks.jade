@@ -1,0 +1,13 @@
+//
+   Created by kriz on 10.12.14.
+
+template(name='Task')
+   h3 Task !{data.name}
+      a#rem(href='#')
+         span.glyphicon.glyphicon-minus
+
+template(name='TaskToolbar')
+   a#add(href='#')
+      span.glyphicon.glyphicon-plus
+   a#rem(href='#')
+      span.glyphicon.glyphicon-minus
