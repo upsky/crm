@@ -13,6 +13,10 @@ Plugin.addStatic({
     },
     'node-toolbar');
 
+Template.Task.created = function () {
+  var inst = Template.instance();
+};
+
 Template.Task.helpers({
     log: function () {
         console.log('%o', this);

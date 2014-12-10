@@ -2,32 +2,31 @@
    Created by kriz on 08.12.14.
 
 template(name='Main')
-   .container
-      .row
-         .col-md-3
-            +TreeContent
-         .col-md-6
-            +NodeContent
+    .container
+        .row
+            .col-md-3
+                +TreeContent
+            .col-md-6
+                +NodeContent
 
 template(name='TreeContent')
-   a#add(href='#')
-      span.glyphicon.glyphicon-plus
-   a#rem(href='#')
-      span.glyphicon.glyphicon-minus
-   #tree-content
+    a#add(href='#')
+        span.glyphicon.glyphicon-plus
+    a#rem(href='#')
+        span.glyphicon.glyphicon-minus
+    #tree-content
 
 template(name='NodeContent')
-   if nodeSelected
-
-      with currentNode
-         +NodeToolbar
-         +each threads
-            +NodeThread
+    if nodeSelected
+        with currentNode
+            +NodeToolbar
+            +each threads
+                +NodeThread
 
 template(name='NodeThread')
-   div
-      +showThread
+    div
+        +showThread
 
 template(name='NodeToolbar')
-   +each toolbars
-      +renderBar
+    +each toolbars
+        +UI.dynamic template=templateName data=..

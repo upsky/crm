@@ -94,7 +94,7 @@ Template.NodeToolbar.helpers({
        return cb;
    },
 
-   renderBar: function () {
-       return this.template();//UI.With({}, this.template());
+   templateName: function () {
+       return this.template().viewName.substring('Temlate.'.length + 1);//Blaze.render(Blaze.With(this, function () { return this.template() }));
    }
 });
