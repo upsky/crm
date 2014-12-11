@@ -1,16 +1,21 @@
 //
    Created by kriz on 10.12.14.
+
 template(name='Task')
    .panel.panel-default
-      .panel-heading.clearfix
-         if getEditState
-            form.thread
-               .input-group
-                  input.form-control(type='text' name="name" value='#{data.name}')
-                  span.input-group-btn
-                     button#save.btn.btn-primary(type='submit')
-                        span.glyphicon.glyphicon-ok
-         else
+      if editState
+         form.thread.form
+            .panel-body
+               .form-group
+                  input.form-control(type='text' name='name' value='#{data.name}')
+               .form-group
+                  textarea.form-control(name='content') #{data.content}
+
+            .panel-footer
+                  button#save.btn.btn-primary(type='submit')
+                     span.glyphicon.glyphicon-ok
+      else
+         .panel-heading.clearfix
             h3.panel-title.pull-left !{data.name}
 
             .btn-group.pull-right
@@ -19,8 +24,8 @@ template(name='Task')
                a#remove.btn.btn-danger.btn-sm(href='#')
                   span.glyphicon.glyphicon-remove
 
-      .panel-body
-         Panel content
+         .panel-body
+            !{data.content}
 
 template(name='TaskUpdate')
    .panel.panel-default

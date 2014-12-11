@@ -51,6 +51,7 @@ Template.TaskToolbar.events({
         var node = this;
         var thread = node.createThread('task');
         thread.data().name = 'New Task';
+        thread.data().content = 'Some content';
         node.save();
     }
 });
