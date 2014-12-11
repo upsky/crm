@@ -41,6 +41,8 @@ Template.Task.events({
         }, this);
 
         this.node().save();
+
+        this.setEditState(false);
     }
 });
 
