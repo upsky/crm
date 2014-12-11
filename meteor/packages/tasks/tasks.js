@@ -6,6 +6,21 @@ Plugin.addType('task', {
     }
 });
 
+Plugin.addStatic(
+    {
+        template: function () {
+            return Template.TaskTreeNode
+        },
+        name: function (node) {
+            var thread = _.find(node.threads(), function (thread) {
+                return thread.type() === 'task';
+            });
+            return thread ? thread.data().name : null;
+        }
+    },
+    'tree'
+);
+
 Plugin.addStatic({
         template: function () {
             return Template.TaskToolbar;

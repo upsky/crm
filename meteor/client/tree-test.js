@@ -8,9 +8,11 @@ var selectedNode = function () {
 };
 
 Template.TreeContent.rendered = function () {
+    var cbs = Plugin._staticCallbacks('tree');
+
     var map = function (node) {
         return {
-            text: node.id(),
+            text: cbs[0].name(node) || 'id: ' + node.id(),
             node: node,
             nodes: node.hasChildNodes() ? _.map(node.children(), map) : undefined
         };
