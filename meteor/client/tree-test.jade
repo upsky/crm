@@ -29,6 +29,7 @@ template(name='NodeThread')
         +showThread
 
 template(name='NodeToolbar')
-    .btn-group
-        +each toolbars
-            +UI.dynamic template=templateName data=..
+    .btn-toolbar
+        .btn-group
+            +each toolbars
+                +UI.dynamic template=templateName data=..

@@ -1,7 +1,5 @@
 // Write your package code here!
 
-titleEdits = [];
-
 Plugin.addType('task', {
     template: function () {
         return Template.Task;

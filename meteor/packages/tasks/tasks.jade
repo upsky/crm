@@ -4,7 +4,7 @@
 template(name='Task')
    .panel.panel-default
       if editState
-         form.thread.form
+         form.form
             .panel-body
                .form-group
                   input.form-control(type='text' name='name' value='#{data.name}')
@@ -12,11 +12,11 @@ template(name='Task')
                   textarea.form-control(name='content') #{data.content}
 
             .panel-footer
-                  button#save.btn.btn-primary(type='submit')
+                  button.btn.btn-primary(type='submit')
                      span.glyphicon.glyphicon-ok
       else
          .panel-heading.clearfix
-            h3.panel-title.pull-left !{data.name}
+            h3.panel-title.pull-left Task: !{data.name}
 
             .btn-group.pull-right
                a#edit.btn.btn-default.btn-sm(href='#')
@@ -27,15 +27,5 @@ template(name='Task')
          .panel-body
             !{data.content}
 
-template(name='TaskUpdate')
-   .panel.panel-default
-      .panel-heading
-         .panel-title
-            input(type='text')
-            a#title-save Save
-      .panel-body
-         textarea content
-
 template(name='TaskToolbar')
-   a#add.btn.btn-default(href='#')
-      span.glyphicon.glyphicon-plus
+   a#add.btn.btn-default(href='#') T
