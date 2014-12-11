@@ -37,11 +37,6 @@ function onChange(callback) {
 
 function getRoot () {
     var root = find('0');
-    // create root
-    if (typeof root === 'undefined') {
-        DataTreeCollection.insert({ _id: '0' });
-        root = find('0');
-    }
 
     return root;
 }
@@ -74,6 +69,10 @@ DataTree = {
 
     Node: Node,
     Tag: Tag,
-    Thread: Thread
+    Thread: Thread,
+
+    ready: function () {
+        return TreeSubscription.ready();
+    }
 };
 

@@ -1,4 +1,34 @@
 //
    Created by kriz on 08.12.14.
 
-template(name='TreeTest')
+template(name='Main')
+    .container
+        .row
+            .col-md-3
+                +TreeContent
+            .col-md-6
+                +NodeContent
+
+template(name='TreeContent')
+    .btn-group.btn-group-xs
+        a#add.btn.btn-default(href='#')
+            span.glyphicon.glyphicon-plus
+        a#rem.btn.btn-default(href='#')
+            span.glyphicon.glyphicon-minus
+    #tree-content
+
+template(name='NodeContent')
+    if nodeSelected
+        with currentNode
+            +NodeToolbar
+            +each threads
+                +NodeThread
+
+template(name='NodeThread')
+    div
+        +showThread
+
+template(name='NodeToolbar')
+    .btn-group
+        +each toolbars
+            +UI.dynamic template=templateName data=..

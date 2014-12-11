@@ -3,7 +3,7 @@
  */
 
 Meteor.subscribe('datatree:tags');
-Meteor.subscribe('datatree:tree');
+TreeSubscription = Meteor.subscribe('datatree:tree');
 
 Deps.autorun(function () {
     Tags = DataTreeTagsCollection.find().fetch();

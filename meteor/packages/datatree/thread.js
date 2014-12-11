@@ -2,12 +2,17 @@
  * Created by kriz on 08.12.14.
  */
 
-Thread = function (data) {
+Thread = function (node, data) {
+    check(node, Node);
     check(data, Match.ObjectIncluding({
-       _type: String
+        _type: String
     }));
 
+    this._node = node;
     this._data = data;
+    this._states = {
+        edit: new ReactiveVar(false)
+    };
 };
 
 _.extend(Thread.prototype, TagsProto);
@@ -16,11 +21,22 @@ _.extend(Thread.prototype, {
         return this._data._type;
     },
 
+    node: function () {
+        return this._node;
+    },
+
     data: function (data) {
         if (typeof data !== 'undefined')
             this._data = data;
 
         return this._data;
+    },
+
+    getEditState: function () {
+        return this._states.edit.get();
+    },
+    setEditState: function (value) {
+        this._states.edit.set(value);
     },
 
     equals: function (other) {
