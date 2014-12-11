@@ -10,6 +10,9 @@ Thread = function (node, data) {
 
     this._node = node;
     this._data = data;
+    this._states = {
+        edit: new ReactiveVar(false)
+    };
 };
 
 _.extend(Thread.prototype, TagsProto);
@@ -27,6 +30,13 @@ _.extend(Thread.prototype, {
             this._data = data;
 
         return this._data;
+    },
+
+    getEditState: function () {
+        return this._states.edit.get();
+    },
+    setEditState: function (value) {
+        this._states.edit.set(value);
     },
 
     equals: function (other) {

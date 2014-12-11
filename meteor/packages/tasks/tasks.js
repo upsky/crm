@@ -1,5 +1,7 @@
 // Write your package code here!
 
+titleEdits = [];
+
 Plugin.addType('task', {
     template: function () {
         return Template.Task;
@@ -24,8 +26,22 @@ Template.Task.helpers({
 });
 
 Template.Task.events({
-    'click #rem': function () {
+    'click #remove': function () {
         this.node().removeThread(this);
+        this.node().save();
+    },
+    'click #edit': function () {
+        this.setEditState(true);
+    },
+    'submit form': function (e) {
+        e.preventDefault();
+
+        var form = $(e.target).serializeArray();
+
+        _.each(form, function(item) {
+            this.data()[item.name] = item.value;
+        }, this);
+
         this.node().save();
     }
 });

@@ -10,10 +10,11 @@ template(name='Main')
                 +NodeContent
 
 template(name='TreeContent')
-    a#add(href='#')
-        span.glyphicon.glyphicon-plus
-    a#rem(href='#')
-        span.glyphicon.glyphicon-minus
+    .btn-group.btn-group-xs
+        a#add.btn.btn-default(href='#')
+            span.glyphicon.glyphicon-plus
+        a#rem.btn.btn-default(href='#')
+            span.glyphicon.glyphicon-minus
     #tree-content
 
 template(name='NodeContent')
@@ -28,5 +29,6 @@ template(name='NodeThread')
         +showThread
 
 template(name='NodeToolbar')
-    +each toolbars
-        +UI.dynamic template=templateName data=..
+    .btn-group
+        +each toolbars
+            +UI.dynamic template=templateName data=..

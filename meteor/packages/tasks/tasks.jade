@@ -1,19 +1,36 @@
 //
    Created by kriz on 10.12.14.
-
 template(name='Task')
    .panel.panel-default
-      .panel-heading
-         .panel-title
-            if titleEdit
-               input(type='text')
-            else
-               a#title-edit !{data.name}
-               a#rem(href='#')
-                  span.glyphicon.glyphicon-minus
+      .panel-heading.clearfix
+         if getEditState
+            form.thread
+               .input-group
+                  input.form-control(type='text' name="name" value='#{data.name}')
+                  span.input-group-btn
+                     button#save.btn.btn-primary(type='submit')
+                        span.glyphicon.glyphicon-ok
+         else
+            h3.panel-title.pull-left !{data.name}
+
+            .btn-group.pull-right
+               a#edit.btn.btn-default.btn-sm(href='#')
+                  span.glyphicon.glyphicon-pencil
+               a#remove.btn.btn-danger.btn-sm(href='#')
+                  span.glyphicon.glyphicon-remove
+
       .panel-body
          Panel content
 
+template(name='TaskUpdate')
+   .panel.panel-default
+      .panel-heading
+         .panel-title
+            input(type='text')
+            a#title-save Save
+      .panel-body
+         textarea content
+
 template(name='TaskToolbar')
-   a#add(href='#')
+   a#add.btn.btn-default(href='#')
       span.glyphicon.glyphicon-plus
