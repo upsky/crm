@@ -1,12 +1,25 @@
 // Write your package code here!
 
-titleEdits = [];
-
 Plugin.addType('task', {
     template: function () {
         return Template.Task;
     }
 });
+
+Plugin.addStatic(
+    {
+        template: function () {
+            return Template.TaskTreeNode
+        },
+        name: function (node) {
+            var thread = _.find(node.threads(), function (thread) {
+                return thread.type() === 'task';
+            });
+            return thread ? thread.data().name : null;
+        }
+    },
+    'tree'
+);
 
 Plugin.addStatic({
         template: function () {
@@ -43,6 +56,8 @@ Template.Task.events({
         }, this);
 
         this.node().save();
+
+        this.setEditState(false);
     }
 });
 
