@@ -22,7 +22,8 @@ template(name='Wiki')
                         span.glyphicon.glyphicon-remove
 
             .panel-body
-                !{data.content}
+                +markdown
+                    !{data.content}
 
 template(name='WikiToolbar')
     a#add-wiki.btn.btn-default(href='#') W
