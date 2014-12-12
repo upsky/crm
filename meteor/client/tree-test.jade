@@ -32,3 +32,7 @@ template(name='NodeToolbar')
     .btn-group
         +each toolbars
             +UI.dynamic template=templateName data=..
+
+
+template(name='UnknownThread')
+    h6 Unknown thread of type !{type}

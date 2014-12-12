@@ -12,7 +12,8 @@ Package.onUse(function(api) {
   api.use('templating');
   api.use('mquandalle:jade');
 
-  api.addFiles('people.js');
+  api.addFiles('people.jade');
+  api.addFiles('people.js', 'client');
 });
 
 Package.onTest(function(api) {

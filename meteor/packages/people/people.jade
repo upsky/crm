@@ -2,3 +2,48 @@
    Created by kriz on 11.12.14.
 
 template(name='People')
+    .panel.panel-default
+        if editState
+            form.thread.form
+                .panel-body
+                    .form-group
+                        span First name
+                        input.form-control(type='text' name='firstname' value='#{data.firstname}')
+                    .form-group
+                        span Last name
+                        input.form-control(type='text' name='lastname' value='#{data.lastname}')
+                    .form-group
+                        span Email
+                        input.form-control(type='text' name='email' value='#{data.email}')
+                .panel-footer
+                    button#save.btn.btn-primary(type='submit')
+                        span.glyphicon.glyphicon-ok
+        else
+            .panel-heading.clearfix
+                h3.panel-title.pull-left !{data.name}
+                .btn-group.pull-right
+                    a#edit.btn.btn-default.btn-sm(href='#')
+                        span.glyphicon.glyphicon-pencil
+                    a#remove.btn.btn-danger.btn-sm(href='#')
+                        span.glyphicon.glyphicon-remove
+            .panel-body
+                +avatar email=data.email
+                | Name: !{data.firstname}
+                br
+                | Last name: !{data.lastname}
+                br
+                | Email: !{data.email}
+
+
+template(name='PeopleUpdate')
+    .panel.panel-default
+        .panel-heading
+            .panel-title
+                input(type='text')
+                a#title-save Save
+        .panel-body
+            textarea content
+
+template(name='PeopleToolbar')
+    a#add.btn.btn-default(href='#')
+        span.glyphicon.glyphicon-user
