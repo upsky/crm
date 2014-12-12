@@ -1,6 +1,8 @@
+accounts-base@1.1.2
 application-configuration@1.0.3
 autoupdate@1.1.3
 base64@1.0.1
+bengott:avatar@0.6.0
 binary-heap@1.0.1
 blaze-tools@1.0.1
 blaze@2.0.3
@@ -30,11 +32,15 @@ iron:location@1.0.3
 iron:middleware-stack@1.0.3
 iron:router@1.0.3
 iron:url@1.0.3
+jparker:crypto-core@0.1.0
+jparker:crypto-md5@0.1.1
+jparker:gravatar@0.3.0
 jquery@1.0.1
 json@1.0.1
 launch-screen@1.0.0
 linto:bootstrap@3.3.2_1
 livedata@1.0.11
+localstorage@1.0.1
 logging@1.0.5
 meteor-platform@1.2.0
 meteor@1.1.3
@@ -53,9 +59,11 @@ reactive-var@1.0.3
 reload@1.1.1
 retry@1.0.1
 routepolicy@1.0.2
+service-configuration@1.0.2
 session@1.0.4
 spacebars-compiler@1.0.3
 spacebars@1.0.3
+stylus@1.0.5
 sujith3g:jstree@0.0.2
 tasks@1.0.0
 templating@1.0.9

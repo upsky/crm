@@ -21,7 +21,7 @@ Template.TreeContent.rendered = function () {
 
     Deps.autorun(function () {
         var root = DataTree.root();
-        var data = [ map(root) ];
+        var data = [map(root)];
 
         Tracker.afterFlush(function () {
             var tree = $('#tree-content');
@@ -84,19 +84,21 @@ Template.NodeContent.helpers({
 Template.NodeThread.helpers({
     showThread: function () {
         var cb = Plugin._threadCallbacks(this.type());
-        var self = this;
-        var template = cb.template();
+        var template = cb ? cb.template() : Template.UnknownThread;
         return template;
     }
 });
 
 Template.NodeToolbar.helpers({
-   toolbars: function () {
-       var cb = Plugin._staticCallbacks('node-toolbar');
-       return cb;
-   },
+    toolbars: function () {
+        var cb = Plugin._staticCallbacks('node-toolbar');
+        return cb;
+    },
 
-   templateName: function () {
-       return this.template().viewName.substring('Temlate.'.length + 1);//Blaze.render(Blaze.With(this, function () { return this.template() }));
-   }
+    templateName: function () {
+        if (this)
+            return this.template().viewName.substring('Template.'.length);//Blaze.render(Blaze.With(this, function () { return this.template() }));
+        else
+            return 'UnknownThread';
+    }
 });
