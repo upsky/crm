@@ -15,8 +15,10 @@ people
 crm-render
 reactive-var
 linto:bootstrap
-sujith3g:jstree
 jquery
+wiki
+mquandalle:bower
+markdown
 bengott:avatar
 accounts-base
 

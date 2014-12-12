@@ -1,0 +1,9 @@
+{
+  "packages": {
+    "bower": {}
+  },
+  "bower": {
+    "bootstrap-treeview": "*",
+    "bootstrap-markdown": "*"
+  }
+}

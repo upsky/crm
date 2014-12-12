@@ -2,7 +2,6 @@
  * Created by kriz on 08.12.14.
  */
 
-
 var currentNode = new ReactiveVar(null);
 var selectedNode = function () {
     return DataTree.find(currentNode.get() || '');
@@ -35,19 +34,6 @@ Template.TreeContent.rendered = function () {
             });
         });
     });
-
-    //.on('select_node.jstree', function (node) {
-    //    currentNode.set(node.node);
-    //})
-    //.jstree({
-    //    core: {
-    //        data: [
-    //            'simple',
-    //            'simple2'
-    //            //map(root)
-    //        ]
-    //    }
-    //});
 };
 
 Template.TreeContent.events({
