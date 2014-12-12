@@ -7,6 +7,11 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0');
+
+  api.use('plugins');
+  api.use('templating');
+  api.use('mquandalle:jade');
+
   api.addFiles('people.js');
 });
 
