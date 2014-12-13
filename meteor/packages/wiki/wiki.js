@@ -36,6 +36,13 @@ Template.Wiki.events({
     }
 });
 
+Template.MarkdownEditor.rendered = function () {
+    this.$('textarea').markdown({
+        disabledButtons: ['cmdPreview'],
+        hiddenButtons: ['cmdPreview']
+    });
+};
+
 Template.WikiToolbar.events({
     'click #add-wiki': function () {
         var node = this;

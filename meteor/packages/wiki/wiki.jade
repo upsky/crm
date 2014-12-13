@@ -6,7 +6,7 @@ template(name='Wiki')
                     .form-group
                         input.form-control(type='text' name='name' value='#{data.name}')
                     .form-group
-                        textarea.form-control(name='content' data-provide='markdown-editable') #{data.content}
+                        +MarkdownEditor
 
                 .panel-footer
                     button.btn.btn-primary(type='submit')
@@ -27,3 +27,6 @@ template(name='Wiki')
 
 template(name='WikiToolbar')
     a#add-wiki.btn.btn-default(href='#') W
+
+template(name='MarkdownEditor')
+    textarea.form-control(name='content') #{data.content}
