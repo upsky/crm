@@ -9,6 +9,7 @@ blaze@2.0.3
 boilerplate-generator@1.0.1
 callback-hook@1.0.1
 check@1.0.2
+chuangbo:marked@0.3.5
 crm-render@1.0.0
 ctl-helper@1.0.4
 ctl@1.0.2
@@ -66,7 +67,6 @@ session@1.0.4
 spacebars-compiler@1.0.3
 spacebars@1.0.3
 stylus@1.0.5
-sujith3g:jstree@0.0.2
 tasks@1.0.0
 templating@1.0.9
 tracker@1.0.3
