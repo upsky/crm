@@ -27,10 +27,7 @@ _.extend(Thread.prototype, {
         return this._node;
     },
 
-    data: function (data) {
-        if (typeof data !== 'undefined')
-            this._data = data;
-
+    data: function () {
         return this._data;
     },
 
