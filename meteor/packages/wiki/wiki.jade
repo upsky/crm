@@ -4,8 +4,6 @@ template(name='Wiki')
             form.form
                 .panel-body
                     .form-group
-                        input.form-control(type='text' name='name' value='#{data.name}')
-                    .form-group
                         +MarkdownEditor
 
                 .panel-footer
@@ -13,7 +11,7 @@ template(name='Wiki')
                         span.glyphicon.glyphicon-ok
         else
             .panel-heading.clearfix
-                h3.panel-title.pull-left It's Wiki: !{data.name}
+                h3.panel-title.pull-left It's Wiki
 
                 .btn-group.pull-right
                     a#edit-wiki.btn.btn-default.btn-sm(href='#')

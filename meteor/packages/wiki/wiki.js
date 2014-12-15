@@ -47,7 +47,6 @@ Template.WikiToolbar.events({
     'click #add-wiki': function () {
         var node = this;
         var thread = node.createThread('wiki');
-        thread.data().name = 'New Wiki';
         thread.data().content = 'Some content';
         node.save();
     }
