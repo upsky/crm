@@ -20,7 +20,7 @@ Plugin.addStatic(
             return thread ? thread.data().firstname + ' ' + thread.data().lastname : null;
         }
     },
-    'people'
+    'tree'
 );
 
 Plugin.addStatic({
@@ -57,7 +57,7 @@ Template.PeopleToolbar.events({
     'click #add': function () {
         var node = this;
         var thread = node.createThread('people');
-        thread.data({
+        _.extend(thread.data(), {
             firstname: 'Unknown firstname',
             lastname: 'Unknown lastname',
             email: 'example@example.com'

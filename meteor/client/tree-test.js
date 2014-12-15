@@ -11,8 +11,10 @@ Template.TreeContent.rendered = function () {
     var cbs = Plugin._staticCallbacks('tree');
 
     var map = function (node) {
+        var cb = _.find(cbs, function (cb) { return cb.name(node) != null; });
+
         return {
-            text: cbs[0].name(node) || 'id: ' + node.id(),
+            text: cb && cb.name(node) || 'id: ' + node.id(),
             node: node,
             nodes: node.hasChildNodes() ? _.map(node.children(), map) : undefined
         };
