@@ -30,26 +30,33 @@ Plugin.addStatic({
     },
     'node-toolbar');
 
+Template.People.created = function () {
+    this.isEditing = ReactiveFuncVar(this.data.isNew);
+};
+
 Template.People.events({
     'click #remove': function () {
         this.node().removeThread(this);
         this.node().save();
     },
     'click #edit': function () {
-        this.setEditState(true);
+        Template.instance().isEditing.set(true);
+    },
+    'click #cancel': function () {
+        this.node().removeThread(this);
+        this.node().save();
     },
     'submit form': function (e) {
         e.preventDefault();
 
         var form = $(e.target).serializeArray();
 
-        _.each(form, function(item) {
-            this.data()[item.name] = item.value;
-        }, this);
+        _.extend(this.data(), form);
 
+        delete this.isNew;
         this.node().save();
 
-        this.setEditState(false);
+        Template.instance().isEditing.set(false);
     }
 });
 
@@ -58,10 +65,11 @@ Template.PeopleToolbar.events({
         var node = this;
         var thread = node.createThread('people');
         _.extend(thread.data(), {
-            firstname: 'Unknown firstname',
-            lastname: 'Unknown lastname',
+            firstname: '',
+            lastname: '',
             email: 'example@example.com'
         });
+        thread.isNew = true;
         node.save();
     }
 });

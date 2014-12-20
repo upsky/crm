@@ -3,7 +3,7 @@
 
 template(name='People')
     .panel.panel-default
-        if editState
+        if inst.isEditing
             form.thread.form
                 .panel-body
                     .form-group

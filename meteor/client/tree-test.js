@@ -7,6 +7,10 @@ var selectedNode = function () {
     return DataTree.find(currentNode.get() || '');
 };
 
+Template.registerHelper('inst', function () {
+    return Template.instance();
+});
+
 Template.TreeContent.rendered = function () {
     var cbs = Plugin._staticCallbacks('tree');
 
