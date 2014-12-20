@@ -1,29 +1,20 @@
 template(name='Wiki')
-    .panel.panel-default
-        if editState
-            form.form
-                .panel-body
-                    .form-group
-                        input.form-control(type='text' name='name' value='#{data.name}')
-                    .form-group
-                        textarea.form-control(name='content' data-provide='markdown-editable') #{data.content}
+    if isEditing
+        form.form
+            .form-group
+                +MarkdownEditor
+            button.btn.btn-primary(type='submit')
+                span.glyphicon.glyphicon-ok
+            .btn-group.pull-right
+                a#remove-wiki.btn.btn-danger.btn-sm(href='#')
+                    span.glyphicon.glyphicon-remove
 
-                .panel-footer
-                    button.btn.btn-primary(type='submit')
-                        span.glyphicon.glyphicon-ok
-        else
-            .panel-heading.clearfix
-                h3.panel-title.pull-left It's Wiki: !{data.name}
-
-                .btn-group.pull-right
-                    a#edit-wiki.btn.btn-default.btn-sm(href='#')
-                        span.glyphicon.glyphicon-pencil
-                    a#remove-wiki.btn.btn-danger.btn-sm(href='#')
-                        span.glyphicon.glyphicon-remove
-
-            .panel-body
-                +markdown
-                    !{data.content}
+    else
+        +markdown
+            !{data.content}
 
 template(name='WikiToolbar')
     a#add-wiki.btn.btn-default(href='#') W
+
+template(name='MarkdownEditor')
+    textarea.form-control(name='content') #{data.content}

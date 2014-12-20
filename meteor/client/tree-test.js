@@ -7,6 +7,10 @@ var selectedNode = function () {
     return DataTree.find(currentNode.get() || '');
 };
 
+Template.registerHelper('inst', function () {
+    return Template.instance();
+});
+
 Template.TreeContent.rendered = function () {
     var cbs = Plugin._staticCallbacks('tree');
 
@@ -68,6 +72,9 @@ Template.NodeContent.helpers({
     }
 });
 
+Template.NodeThread.created = function () {
+    this.data.isEditing = new ReactiveFuncVar(this.data.isNew);
+};
 
 Template.NodeThread.helpers({
     showThread: function () {
@@ -75,6 +82,12 @@ Template.NodeThread.helpers({
         var template = cb ? cb.template() : Template.UnknownThread;
         return template;
     }
+});
+
+Template.NodeThread.events({
+   'click #edit': function () {
+       this.isEditing.set(true);
+   }
 });
 
 Template.NodeToolbar.helpers({

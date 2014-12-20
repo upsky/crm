@@ -28,23 +28,13 @@ Plugin.addStatic({
     },
     'node-toolbar');
 
-Template.Task.created = function () {
-  var inst = Template.instance();
-};
-
-Template.Task.helpers({
-    log: function () {
-        console.log('%o', this);
-    }
-});
-
 Template.Task.events({
     'click #remove': function () {
         this.node().removeThread(this);
         this.node().save();
     },
     'click #edit': function () {
-        this.setEditState(true);
+        this.isEditing.set(true);
     },
     'submit form': function (e) {
         e.preventDefault();
@@ -55,9 +45,10 @@ Template.Task.events({
             this.data()[item.name] = item.value;
         }, this);
 
+        delete this.isNew;
         this.node().save();
 
-        this.setEditState(false);
+        this.isEditing.set(false);
     }
 });
 
@@ -67,6 +58,8 @@ Template.TaskToolbar.events({
         var thread = node.createThread('task');
         thread.data().name = 'New Task';
         thread.data().content = 'Some content';
+        thread.isNew = true;
+
         node.save();
     }
 });

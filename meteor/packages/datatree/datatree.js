@@ -20,6 +20,8 @@ function removeChildrenRec (node) {
 
 // TODO move to the server
 function remove(node) {
+    check(node, Node);
+
     DataTreeCollection.find({ children: node.id() })
         .forEach(function (node) {
             node.removeChild(node);
@@ -39,6 +41,13 @@ function getRoot () {
     var root = find('0');
 
     return root;
+}
+
+// add root node
+var rootData = { _id: '0' };
+
+function _createRoot() {
+    DataTreeCollection.insert(rootData);
 }
 
 function createTag (name, id) {
@@ -64,6 +73,7 @@ DataTree = {
     remove: remove,
     onChange: onChange,
     root: getRoot,
+    _createRoot: _createRoot,
 
     createTag: createTag,
 

@@ -3,7 +3,14 @@
  */
 
 var transformNode = function (nodeData) {
-    var node = new Node(nodeData);
+    var node = NodeCache.getItem(nodeData._id);
+    if (node)
+        node._updateData(nodeData);
+    else {
+        node = new Node(nodeData);
+        NodeCache.setItem(nodeData._id, node);
+    }
+
     return node;
 };
 

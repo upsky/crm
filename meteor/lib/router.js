@@ -7,7 +7,7 @@ Router.route('/tree-test', function () {
     this.render('TreeTest');
 });
 
-Router.route('/main', {
+Router.route('/', {
     waitOn: function () {
         return DataTree;
     },
@@ -16,3 +16,8 @@ Router.route('/main', {
             this.render('Main');
     }
 });
+
+Router.route('/main', function () {
+    this.redirect('/');
+});
+
