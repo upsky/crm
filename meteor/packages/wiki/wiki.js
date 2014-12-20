@@ -19,7 +19,7 @@ Template.Wiki.events({
         this.node().save();
     },
     'click #edit-wiki': function () {
-        this.setEditState(true);
+        this.isEditing.set(true);
     },
     'submit form': function (e) {
         e.preventDefault();
@@ -30,16 +30,18 @@ Template.Wiki.events({
             this.data()[item.name] = item.value;
         }, this);
 
+        delete this.isNew;
         this.node().save();
 
-        this.setEditState(false);
+        this.isEditing.set(false);
     }
 });
 
 Template.MarkdownEditor.rendered = function () {
     this.$('textarea').markdown({
         disabledButtons: ['cmdPreview'],
-        hiddenButtons: ['cmdPreview']
+        hiddenButtons: ['cmdPreview'],
+        autofocus: true
     });
 };
 
@@ -47,7 +49,8 @@ Template.WikiToolbar.events({
     'click #add-wiki': function () {
         var node = this;
         var thread = node.createThread('wiki');
-        thread.data().content = 'Some content';
+        thread.isNew = true;
+        thread.data().content = '';
         node.save();
     }
 });

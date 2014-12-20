@@ -30,9 +30,9 @@ Plugin.addStatic({
     },
     'node-toolbar');
 
-Template.People.created = function () {
-    this.isEditing = ReactiveFuncVar(this.data.isNew);
-};
+//Template.People.created = function () {
+//    this.isEditing = ReactiveFuncVar(this.data.isNew);
+//};
 
 Template.People.events({
     'click #remove': function () {
@@ -40,23 +40,30 @@ Template.People.events({
         this.node().save();
     },
     'click #edit': function () {
-        Template.instance().isEditing.set(true);
+        this.isEditing.set(true);
     },
     'click #cancel': function () {
-        this.node().removeThread(this);
-        this.node().save();
+        if (this.isNew) {
+            this.node().removeThread(this);
+            this.node().save();
+        } else {
+            this.isEditing.set(false);
+        }
     },
     'submit form': function (e) {
         e.preventDefault();
 
         var form = $(e.target).serializeArray();
 
-        _.extend(this.data(), form);
+        var data = this.data();
+        _.forEach (form, function (field) {
+            data[field.name] = field.value;
+        });
 
         delete this.isNew;
         this.node().save();
 
-        Template.instance().isEditing.set(false);
+        this.isEditing.set(false);
     }
 });
 

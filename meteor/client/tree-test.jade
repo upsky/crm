@@ -21,12 +21,17 @@ template(name='NodeContent')
     if nodeSelected
         with currentNode
             +NodeToolbar
-            +each threads
-                +NodeThread
+            ul.list-group
+                +each threads
+                    li.list-group-item
+                        +NodeThread
 
 template(name='NodeThread')
-    div
-        +showThread
+    unless isEditing
+        .btn-group-vertical.pull-right
+            button#edit.btn.btn-danger.btn-sm
+                span.glyphicon.glyphicon-pencil
+    +showThread
 
 template(name='NodeToolbar')
     .btn-toolbar

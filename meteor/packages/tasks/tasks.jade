@@ -2,30 +2,21 @@
    Created by kriz on 10.12.14.
 
 template(name='Task')
-   .panel.panel-default
-      if editState
-         form.form
-            .panel-body
-               .form-group
-                  input.form-control(type='text' name='name' value='#{data.name}')
-               .form-group
-                  textarea.form-control(name='content') #{data.content}
+   if isEditing
+      form.form
+         .form-group
+            input.form-control(type='text' name='name' value='#{data.name}')
+         .form-group
+            textarea.form-control(name='content') #{data.content}
 
-            .panel-footer
-                  button.btn.btn-primary(type='submit')
-                     span.glyphicon.glyphicon-ok
-      else
-         .panel-heading.clearfix
-            h3.panel-title.pull-left It's Task: !{data.name}
+         button.btn.btn-primary(type='submit')
+            span.glyphicon.glyphicon-ok
+         a#remove.btn.btn-danger.btn-sm(href='#')
+            span.glyphicon.glyphicon-remove
 
-            .btn-group.pull-right
-               a#edit.btn.btn-default.btn-sm(href='#')
-                  span.glyphicon.glyphicon-pencil
-               a#remove.btn.btn-danger.btn-sm(href='#')
-                  span.glyphicon.glyphicon-remove
-
-         .panel-body
-            | !{data.content}
+   else
+      p !{data.name}
+      p !{data.content}
 
 template(name='TaskToolbar')
    a#add.btn.btn-default(href='#') T
