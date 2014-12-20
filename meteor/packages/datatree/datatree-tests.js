@@ -1,56 +1,72 @@
 // Write your tests here!
 // Here is an example.
+
+var setup = function () {
+    if (!DataTree.root())
+        DataTree._createRoot();
+};
+
+var teardown = function () {
+    DataTree.remove(DataTree.root());
+};
+
 Tinytest.add('root node', function (test) {
-  rootNode = DataTree.root();
-  test.instanceOf(rootNode, DataTree.Node);
+    setup();
+
+    rootNode = DataTree.root();
+    test.instanceOf(rootNode, DataTree.Node);
 
 
-  rootChild = rootNode.createChild();
-  test.instanceOf(rootChild, DataTree.Node);
+    rootChild = rootNode.createChild();
+    test.instanceOf(rootChild, DataTree.Node);
 
-  thread = rootChild.createThread('some');
-  _.extend(thread.data(), {
-    name: 'some-data',
-    value: 'some-value',
-    and: 42,
-    and1: 'so on'
-  });
+    thread = rootChild.createThread('some');
+    _.extend(thread.data(), {
+        name: 'some-data',
+        value: 'some-value',
+        and: 42,
+        and1: 'so on'
+    });
 
-  test.equal(thread.type(), 'some');
-  test.equal(thread.data().name, 'some-data');
-  test.equal(thread.data().and, 42);
+    test.equal(thread.type(), 'some');
+    test.equal(thread.data().name, 'some-data');
+    test.equal(thread.data().and, 42);
 
-  rootChild.save();
-
-
-  var testChild = DataTree.root().children()[0];
-  var testThread = testChild.threads()[0];
+    rootChild.save();
 
 
-  test.equal(testThread.type(), 'some');
-  var data = testThread.data();
-  test.equal(data.and1, 'so on');
+    var testChild = DataTree.root().children()[0];
+    var testThread = testChild.threads()[0];
 
-  DataTree.remove(root);
+
+    test.equal(testThread.type(), 'some');
+    var data = testThread.data();
+    test.equal(data.and1, 'so on');
+
+    teardown();
 });
 
 Tinytest.add('tags', function (test) {
-  var tag = DataTree.createTag('someTag');
+    setup();
 
-  test.instanceOf(tag, DataTree.Tag);
-  test.equal(tag.name(), 'someTag');
+    var tag = DataTree.createTag('someTag');
 
-  var root = DataTree.root();
-  root.addTag(tag);
+    test.instanceOf(tag, DataTree.Tag);
+    test.equal(tag.name(), 'someTag');
 
-  console.log('%o', root);
+    var root = DataTree.root();
+    root.addTag(tag);
 
-  test.isTrue(_(root.tags()).contains(tag));
+    console.log('%o', root);
 
-  var tag2 = DataTree.createTag('tag2');
-  root.addTag(tag2);
+    test.isTrue(_(root.tags()).contains(tag));
 
-  test.isTrue(_(root.tags()).contains(tag));
-  test.isTrue(_(root.tags()).contains(tag2));
+    var tag2 = DataTree.createTag('tag2');
+    root.addTag(tag2);
+
+    test.isTrue(_(root.tags()).contains(tag));
+    test.isTrue(_(root.tags()).contains(tag2));
+
+    teardown();
 });
 

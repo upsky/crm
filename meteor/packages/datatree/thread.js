@@ -8,6 +8,9 @@ Thread = function (node, data) {
         _type: String
     }));
 
+    if (!data._id)
+        data._id = Random.id();
+
     this._node = node;
     this._data = data;
 
@@ -19,6 +22,14 @@ Thread = function (node, data) {
 
 _.extend(Thread.prototype, TagsProto);
 _.extend(Thread.prototype, {
+    _updateData: function (threadData) {
+        this._data = threadData;
+    },
+
+    id: function () {
+        return this._data._id;
+    },
+
     type: function () {
         return this._data._type;
     },

@@ -4,12 +4,37 @@ Node = function (data) {
 
 _.extend(Node.prototype, TagsProto);
 _.extend(Node.prototype, {
+    _updateData: function (newData) {
+        this._data = newData;
+
+        // update threads
+        var self = this;
+        this._threads = _.map(newData.threads, function (threadData) {
+            // TODO remove, it was actual when threads have no ids
+            if ( !threadData._id )
+                threadData._id = new Mongo.ObjectID();
+
+            var thread = _.find(self._threads, function (thread) {
+                var found = thread._data._id === threadData._id;
+                console.log('thread found ' + threadData._id);
+                return found;
+            });
+
+            if (thread) {
+                thread._updateData(threadData);
+            } else {
+                thread = new Thread(self, threadData);
+            }
+            return thread;
+        });
+    },
+
     id: function () {
         return this._data._id;
     },
 
     children: function () {
-        if (!_.isEmpty(this._data.children)) {
+        if (this.hasChildNodes()) {
             return DataTreeCollection.find({
                 _id: { $in: this._data.children }
             }).fetch();
@@ -55,9 +80,14 @@ _.extend(Node.prototype, {
 
     threads: function () {
         var self = this;
-        return _.map(this._data.threads, function (data) {
-            return new Thread(self, data);
-        });
+
+        if (! this._threads) {
+            this._threads = _.map(this._data.threads, function (data) {
+                return new Thread(self, data);
+            });
+        }
+
+        return this._threads;
     },
 
     createThread: function (type) {
@@ -67,8 +97,12 @@ _.extend(Node.prototype, {
 
         if (!this._data.hasOwnProperty('threads'))
             this._data.threads = [];
-
         this._data.threads.push(thread.data());
+
+        if (!this.hasOwnProperty('_threads'))
+            this._threads = [];
+        this._threads.push(thread);
+
         return thread;
     },
 

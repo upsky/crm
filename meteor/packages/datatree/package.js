@@ -6,16 +6,21 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
+  api.versionsFrom('1.0');
+
   api.use('deps');
   api.use('underscore');
   api.use('check');
+  api.use('jscache');
+  api.use('reactive-var'); // TODO remove
 
-  api.versionsFrom('1.0');
   api.addFiles('tags.js');
   api.addFiles('thread.js');
   api.addFiles('node.js');
+  api.addFiles('cache.js');
   api.addFiles('datatree-col.js');
   api.addFiles('datatree.js');
+
   api.addFiles('subscribe.js', 'client');
   api.addFiles('publish.js', 'server');
 
